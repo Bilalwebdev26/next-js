@@ -7,12 +7,13 @@ export async function sendVerificationEmail(
   verifyCode: string
 ): Promise<apiResponse> {
   try {
-    await resend.emails.send({
+   const send =  await resend.emails.send({
         from:"onboarding@resend.dev",
         to:email,
         subject:"Verification Code Course",
         react:verificationEmail({username,otp:verifyCode})
     })
+    console.log("Send email : ",send)
     return { success: true, message: "Verification email send successfully" };
   } catch (emailError) {
     console.error("Error sending verification Email : ", emailError);
